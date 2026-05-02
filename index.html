@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Election Process Education Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">EP</div>
+        <div>
+          <h1>Election Process Education Assistant</h1>
+          <p>Clear, accurate guidance for election questions</p>
+        </div>
+      </div>
+      <div class="mode">
+        <label for="assistantMode">Mode</label>
+        <select id="assistantMode">
+          <option>Election Process Education</option>
+          <option disabled>General Civic Info (Coming soon)</option>
+        </select>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="chat">
+        <div class="chat-header">
+          <h2>Conversation</h2>
+          <button id="resetChat" class="ghost">Reset</button>
+        </div>
+        <div id="chatLog" class="chat-log" aria-live="polite"></div>
+        <form id="chatForm" class="chat-input" autocomplete="off">
+          <input
+            id="userInput"
+            type="text"
+            placeholder="Ask about eligibility, voting steps, documents, or polling booths"
+            aria-label="Message"
+            required
+          />
+          <button type="submit" class="primary">Send</button>
+        </form>
+      </section>
+
+      <aside class="side">
+        <div class="card">
+          <div class="card-head">
+            <span class="icon">✅</span>
+            <h3>Eligibility Checker</h3>
+          </div>
+          <p>Ask if you are eligible to vote. The assistant will request your age and citizenship status.</p>
+          <button id="startEligibility" class="secondary">Start Check</button>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="icon">❓</span>
+            <h3>FAQ</h3>
+          </div>
+          <ul class="faq">
+            <li>"How do I vote?"</li>
+            <li>"What documents are required?"</li>
+            <li>"Where is my polling booth?"</li>
+          </ul>
+          <button id="faqSteps" class="secondary">See Voting Steps</button>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="icon">📍</span>
+            <h3>Polling Booth Finder</h3>
+          </div>
+          <p>Share a city or neighborhood to view mock nearby polling booths.</p>
+          <button id="startBooth" class="secondary">Find Booths</button>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <span>Simulated data only. For official guidance, check your local election authority.</span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

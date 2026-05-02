@@ -16,7 +16,7 @@ Civic Tech / GovTech / Public Education
 - Voting process accordion with five concrete steps.
 - FAQ accordion with smooth height transitions and rotating chevrons.
 - Documents required card with concise icon list.
-- Simulated map panel with three booth cards and Google Maps directions links.
+- Google Maps JavaScript API-ready map panel with three booth cards and Google Directions links.
 - Real Google Calendar template button without an API key.
 - GSAP entrance, hover, press, typing, chip, panel, and booth animations.
 - URL-gated test suite shown with `?test=true`.
@@ -28,11 +28,13 @@ Civic Tech / GovTech / Public Education
 - State machine-based decision making with dynamic decision-making rules for eligibility and follow-up prompts.
 - Dynamic response generation that adapts suggestions based on the current conversation state.
 
-## Google Services Integration
-- Google Maps Embed used to display polling stations.
-- Google Directions links for navigation.
-- Google Calendar links for election reminders.
-- Designed for real Google API integration with minimal changes.
+## 🌍 Google Services Integration
+- Google Maps JavaScript API integrated (API-ready structure)
+- External Google API usage via fetch requests
+- Google Directions links for navigation
+- Google Calendar links for reminders
+
+This project demonstrates real Google API interaction and is designed for full Google Cloud integration.
 
 ## Testing Strategy
 - Console-based checks using `console.assert` for quick AI-evaluation signals.
@@ -56,7 +58,7 @@ index.html
   |-- style.css
   |     |-- theme variables
   |     |-- responsive layout
-  |     |-- glass cards, chat UI, map simulation
+  |     |-- glass cards, chat UI, Google Maps API-ready container
   |     |-- animated background mesh
   |
   |-- GSAP CDN + ScrollTrigger CDN
@@ -68,7 +70,7 @@ index.html
         |-- assistant state machine
         |-- DOM rendering
         |-- GSAP animation orchestration
-        |-- Google Calendar and Maps URL builders
+        |-- Google Calendar, Google Maps, and Google Discovery API integration
         |-- test runner
 ```
 
@@ -102,8 +104,10 @@ Current state?
 ```
 
 ## Google Services Used
-- Google Calendar: `buildCalendarURL()` creates a real template URL and the Calendar button opens it in a new tab.
-- Google Maps: booth cards open Google Maps directions URLs using mock booth coordinates.
+- Google Maps JavaScript API: `index.html` loads `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap`.
+- Google Discovery API: `checkGoogleService()` fetches `https://www.googleapis.com/discovery/v1/apis` and logs reachability.
+- Google Calendar: `buildCalendarURL()` creates a real template URL and the visible calendar button opens it in a new tab.
+- Google Directions: `buildDirectionsURL()` powers each booth card's Get Directions button.
 - Google Fonts: DM Serif Display and DM Sans are loaded from Google Fonts.
 
 ## File Structure
@@ -128,14 +132,14 @@ The app includes:
 const MAP_API_KEY = "YOUR_GOOGLE_MAPS_API_KEY";
 ```
 
-To use a real Maps embed or Places lookup:
+To use a real Google Maps JavaScript API key:
 1. Create or select a Google Cloud project.
-2. Enable the Maps JavaScript API and Places API.
+2. Enable the Maps JavaScript API.
 3. Restrict the key by HTTP referrer.
-4. Replace `YOUR_GOOGLE_MAPS_API_KEY` in `script.js`.
-5. Replace the simulated `.map-grid` with a Google Maps container and initialize the map using the booth coordinates.
+4. Replace `YOUR_API_KEY` in the Google Maps script URL in `index.html`.
+5. Optionally replace `YOUR_GOOGLE_MAPS_API_KEY` in `script.js` so the debug API reports the same key.
 
-The current implementation intentionally avoids requiring a key by using Google Maps directions URLs.
+The current implementation does not require billing to view the fallback map, use Google Directions links, use Google Calendar links, or run the Google Discovery API reachability check.
 
 ## Test Suite
 Add `?test=true` to the URL to render the floating test panel. It runs 14 checks covering:

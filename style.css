@@ -904,9 +904,54 @@ h2 {
   border: 0;
 }
 
+.google-map {
+  width: 100%;
+  min-height: 240px;
+  isolation: isolate;
+}
+
+.google-map.map-loaded {
+  background: #102037;
+}
+
+.google-map.map-loaded::before,
+.google-map.map-loaded::after {
+  display: none;
+}
+
+.map-status {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100% - 28px);
+  padding: 7px 10px;
+  border: 1px solid rgba(240, 180, 41, 0.28);
+  border-radius: 999px;
+  background: rgba(8, 13, 26, 0.78);
+  color: #f8d982;
+  font-size: 0.76rem;
+  font-weight: 800;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.map-status::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.55);
+  content: "";
+}
+
 .map-grid {
   position: relative;
-  min-height: 205px;
+  min-height: 240px;
   background:
     linear-gradient(35deg, transparent 47%, rgba(240, 180, 41, 0.16) 49%, rgba(240, 180, 41, 0.16) 51%, transparent 53%),
     linear-gradient(135deg, transparent 43%, rgba(79, 142, 247, 0.16) 46%, rgba(79, 142, 247, 0.16) 49%, transparent 52%),

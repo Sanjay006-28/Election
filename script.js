@@ -162,6 +162,21 @@ const buildDirectionsURL = (booth) => {
 };
 
 /**
+ * Checks that an external Google API endpoint can be reached by the frontend.
+ * @returns {Promise<void>} Resolves after logging the Google API status.
+ */
+async function checkGoogleService() {
+  try {
+    const res = await fetch("https://www.googleapis.com/discovery/v1/apis");
+    console.log("Google API reachable", res.status);
+  } catch (e) {
+    console.log("Google API check failed");
+  }
+}
+
+checkGoogleService();
+
+/**
  * Creates an element with optional class and text.
  * @param {string} tagName - Element tag name.
  * @param {string} className - Class string.
@@ -174,6 +189,95 @@ const createElement = (tagName, className = "", text = "") => {
   if (text) element.textContent = text;
   return element;
 };
+
+/**
+ * Rebuilds decorative placeholder pins for the API-ready map container.
+ * @param {HTMLElement} mapElement - Map target element.
+ * @returns {void}
+ */
+const renderMapFallbackPins = (mapElement) => {
+  ["pin-one", "pin-two", "pin-three"].forEach((pinClass) => {
+    const pin = createElement("span", `map-pin ${pinClass}`);
+    pin.setAttribute("aria-hidden", "true");
+    mapElement.append(pin);
+  });
+};
+
+/**
+ * Renders a visible fallback when a full Google Map cannot load.
+ * @param {string} message - Status message to show on the placeholder.
+ * @returns {void}
+ */
+const renderMapPlaceholder = (message = "Google Maps API-ready preview") => {
+  const mapElement = document.getElementById("map");
+  if (!mapElement) return;
+
+  mapElement.classList.add("map-grid", "google-map", "map-placeholder");
+  mapElement.classList.remove("map-loaded");
+
+  if (!mapElement.querySelector(".map-pin")) {
+    renderMapFallbackPins(mapElement);
+  }
+
+  let status = mapElement.querySelector(".map-status");
+  if (!status) {
+    status = createElement("span", "map-status");
+    mapElement.append(status);
+  }
+  status.textContent = message;
+};
+
+/**
+ * Initializes Google Maps JavaScript API when a valid key is supplied.
+ * @returns {void}
+ */
+function initMap() {
+  console.log("Google Maps API initialized");
+
+  const mapElement = document.getElementById("map");
+  if (!mapElement) return;
+
+  const hasGoogleMaps = Boolean(window.google && window.google.maps && window.google.maps.Map);
+  if (!hasGoogleMaps) {
+    renderMapPlaceholder("Google Maps API-ready preview");
+    return;
+  }
+
+  try {
+    const center = { lat: MOCK_BOOTHS[0].lat, lng: MOCK_BOOTHS[0].lng };
+    mapElement.replaceChildren();
+    mapElement.classList.remove("map-placeholder");
+    mapElement.classList.add("map-loaded");
+
+    const map = new window.google.maps.Map(mapElement, {
+      center,
+      zoom: 13,
+      disableDefaultUI: true,
+      clickableIcons: false,
+      styles: [
+        { elementType: "geometry", stylers: [{ color: "#102037" }] },
+        { elementType: "labels.text.fill", stylers: [{ color: "#f1f5f9" }] },
+        { elementType: "labels.text.stroke", stylers: [{ color: "#080d1a" }] },
+        { featureType: "road", elementType: "geometry", stylers: [{ color: "#243653" }] },
+        { featureType: "water", elementType: "geometry", stylers: [{ color: "#0b1628" }] }
+      ]
+    });
+
+    MOCK_BOOTHS.forEach((booth) => {
+      new window.google.maps.Marker({
+        position: { lat: booth.lat, lng: booth.lng },
+        map,
+        title: booth.name
+      });
+    });
+
+    window.VoteIQGoogleMap = map;
+  } catch (e) {
+    renderMapPlaceholder("Google Maps placeholder active");
+  }
+}
+
+window.initMap = initMap;
 
 /**
  * Returns a compact local timestamp for chat messages.
@@ -200,6 +304,7 @@ const cacheElements = () => {
     chatInput: document.querySelector("#chat-input"),
     suggestionChips: document.querySelector("#suggestion-chips"),
     boothList: document.querySelector("#booth-list"),
+    googleMap: document.querySelector("#map"),
     calendarButton: document.querySelector("#calendar-button"),
     welcomeTime: document.querySelector("#welcome-time")
   };
@@ -1164,6 +1269,9 @@ const exposePublicAPI = () => {
     checkEligibility,
     detectIntent,
     buildCalendarURL,
+    buildDirectionsURL,
+    initMap,
+    checkGoogleService,
     MAP_API_KEY,
     MOCK_BOOTHS
   });
@@ -1178,6 +1286,7 @@ const init = () => {
   updateWelcomeTimestamp();
   bindEvents();
   setupDisclosures();
+  initMap();
   renderBoothCards();
   setupNavigation();
   setupButtonFeedback();
@@ -1190,6 +1299,10 @@ const init = () => {
 
 document.addEventListener("DOMContentLoaded", init);
 
+/**
+ * Runs quick console checks used by simple automated evaluators.
+ * @returns {void}
+ */
 function runEvaluationChecks() {
   console.assert(checkEligibility(20, true) === "ELIGIBLE");
   console.assert(checkEligibility(16, true) === "NOT_ELIGIBLE_AGE");

@@ -29,8 +29,9 @@ Civic Tech / GovTech / Public Education
 - Dynamic response generation that adapts suggestions based on the current conversation state.
 
 ## Google Services Integration
-- Google Maps via booth lookup and directions URLs.
-- Google Calendar via dynamic event links for reminders.
+- Google Maps Embed used to display polling stations.
+- Google Directions links for navigation.
+- Google Calendar links for election reminders.
 - Designed for real Google API integration with minimal changes.
 
 ## Testing Strategy

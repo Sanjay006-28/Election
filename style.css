@@ -897,6 +897,13 @@ h2 {
   box-shadow: inset 0 0 35px rgba(79, 142, 247, 0.08);
 }
 
+.map-embed {
+  display: block;
+  width: 100%;
+  height: 240px;
+  border: 0;
+}
+
 .map-grid {
   position: relative;
   min-height: 205px;

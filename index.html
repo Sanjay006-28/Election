@@ -281,20 +281,22 @@
         <section class="map-card info-card" aria-labelledby="booth-panel-title">
           <div class="card-heading">
             <p class="eyebrow">Nearby</p>
-            <h2 id="booth-panel-title">Booth Finder</h2>
+            <h2 id="booth-panel-title">Find Nearby Polling Stations</h2>
           </div>
 
-          <div class="map-shell" aria-label="Simulated civic map">
-            <div class="map-grid" aria-hidden="true">
-              <span class="map-pin pin-one"></span>
-              <span class="map-pin pin-two"></span>
-              <span class="map-pin pin-three"></span>
-            </div>
+          <div class="map-shell" aria-label="Google Maps embed for polling stations">
+            <iframe
+              class="map-embed"
+              title="Google Maps polling stations"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=polling+station+near+me&output=embed"
+            ></iframe>
           </div>
 
-          <button id="calendar-button" class="btn btn-blue" type="button" aria-label="Add election day reminder to Google Calendar">
+          <button id="calendar-button" class="btn btn-blue" type="button" aria-label="Add election reminder to Google Calendar">
             <span aria-hidden="true">▣</span>
-            Add to Google Calendar
+            Add Election Reminder
           </button>
         </section>
 

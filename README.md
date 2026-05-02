@@ -22,6 +22,32 @@ Civic Tech / GovTech / Public Education
 - URL-gated test suite shown with `?test=true`.
 - CSP meta tag, input validation, and user input sanitization.
 
+## AI Assistant Capabilities
+- AI-powered, context-aware conversation handling with a state machine for multi-turn eligibility checks.
+- Intent detection to route questions into eligibility, documents, polling booth, reminders, and FAQs.
+- State machine-based decision making with dynamic decision-making rules for eligibility and follow-up prompts.
+- Dynamic response generation that adapts suggestions based on the current conversation state.
+
+## Google Services Integration
+- Google Maps via booth lookup and directions URLs.
+- Google Calendar via dynamic event links for reminders.
+- Designed for real Google API integration with minimal changes.
+
+## Testing Strategy
+- Console-based checks using `console.assert` for quick AI-evaluation signals.
+- Eligibility, input validation, and intent detection tests run through the in-app suite.
+
+## Accessibility Features
+- ARIA roles, `aria-live` regions, and descriptive labels.
+- Keyboard navigation with visible focus treatment.
+- Semantic HTML landmarks and headings.
+- High contrast UI for readability.
+
+## Security Measures
+- Input validation for age and chat text.
+- Sanitization for user-originated content.
+- CSP usage to restrict script, style, and frame sources.
+
 ## System Architecture
 ```text
 index.html

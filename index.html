@@ -10,6 +10,11 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="backdrop" aria-hidden="true">
+    <span class="orb orb-one"></span>
+    <span class="orb orb-two"></span>
+    <span class="grid"></span>
+  </div>
   <div class="page">
     <header class="topbar">
       <div class="brand">
@@ -32,7 +37,7 @@
       <section class="chat">
         <div class="chat-header">
           <h2>Conversation</h2>
-          <button id="resetChat" class="ghost">Reset</button>
+          <button id="resetChat" class="ghost" type="button">Reset</button>
         </div>
         <div id="chatLog" class="chat-log" aria-live="polite"></div>
         <form id="chatForm" class="chat-input" autocomplete="off">
@@ -54,7 +59,7 @@
             <h3>Eligibility Checker</h3>
           </div>
           <p>Ask if you are eligible to vote. The assistant will request your age and citizenship status.</p>
-          <button id="startEligibility" class="secondary">Start Check</button>
+          <button id="startEligibility" class="secondary" type="button">Start Check</button>
         </div>
 
         <div class="card">
@@ -67,7 +72,7 @@
             <li>"What documents are required?"</li>
             <li>"Where is my polling booth?"</li>
           </ul>
-          <button id="faqSteps" class="secondary">See Voting Steps</button>
+          <button id="faqSteps" class="secondary" type="button">See Voting Steps</button>
         </div>
 
         <div class="card">
@@ -76,7 +81,15 @@
             <h3>Polling Booth Finder</h3>
           </div>
           <p>Share a city or neighborhood to view mock nearby polling booths.</p>
-          <button id="startBooth" class="secondary">Find Booths</button>
+          <button id="startBooth" class="secondary" type="button">Find Booths</button>
+        </div>
+
+        <div class="card highlight">
+          <div class="card-head">
+            <span class="icon">GS</span>
+            <h3>Google Services</h3>
+          </div>
+          <p>Booth lookup links to Google Maps search. Reminders create a Google Calendar link.</p>
         </div>
       </aside>
     </main>
@@ -86,6 +99,7 @@
     </footer>
   </div>
 
-  <script src="app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-sqU3j5EyaPLQ5PHuUmdVoz4h4t3Txp2AlSwikf3TUIj0RsJNz0AxnyXYIifGvCWHLgIdn9UPVXfQ5oFWdr2gkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="script.js"></script>
 </body>
 </html>

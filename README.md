@@ -1,125 +1,69 @@
 # Election Process Education Assistant
 
-## 📌 Overview
+## Project Title
+Election Process Education Assistant
 
-The Election Process Education Assistant is a smart, interactive assistant designed to help users understand the election process, check eligibility, and receive guidance on voting procedures. The system provides structured, easy-to-understand responses and simulates real-world assistance.
-
----
-
-## 🎯 Chosen Vertical
-
+## Chosen Vertical
 Election Process Education
 
----
+## Features
+- Smart chat assistant that recognizes eligibility, voting steps, documents, and polling booth intents
+- Decision-making logic based on age and citizenship with clear reasoning
+- Context awareness to avoid repeated questions during the session
+- Smart suggestions that guide next steps after each response
+- Polling booth finder with Google Maps search link integration
+- Reminder workflow with Google Calendar event link integration
+- GSAP-powered animations for page load and chat interactions
 
-## 🚀 Features
+## Approach and Logic
+The assistant uses intent detection, structured responses, and session memory to keep the experience focused.
 
-### 1. Smart Chat Assistant
+Eligibility logic:
+- If age is 18 or older AND user is a citizen, the user is eligible to vote
+- Otherwise, the user is not eligible
 
-* Answers questions like:
+## How It Works
+1. User types a question in the chat interface
+2. The assistant detects intent and checks session context
+3. The assistant asks for missing information only once
+4. The assistant responds with structured steps or bullet points
+5. The assistant suggests practical next actions
 
-  * How to vote
-  * Eligibility criteria
-  * Required documents
-* Provides step-by-step guidance
+## Google Services Used (Real or Simulated)
+- Google Maps (real service link): Opens a Google Maps search for polling booths based on location input
+- Google Calendar (real service link): Generates a calendar event link for election reminders
 
-### 2. Eligibility Checker
+## Assumptions
+- Users provide accurate input
+- Eligibility rules are simplified and may vary by location
+- Google service links open in a new tab
 
-* Takes user input (age, citizenship)
-* Determines voting eligibility using logical rules
+## Setup Instructions
+1. Open the project folder
+2. Open index.html in a browser
 
-### 3. Polling Booth Finder (Simulated / Map-based)
+## Testing
+Eligibility test cases:
+- Age 20, citizen yes -> Eligible
+- Age 17, citizen yes -> Not eligible
+- Age 30, citizen no -> Not eligible
 
-* Uses location input
-* Displays nearby polling stations (simulated or via map)
+Chat interaction testing:
+- Ask eligibility, provide age and citizenship
+- Ask for voting steps and document requirements
+- Ask for polling booth and provide a location
 
-### 4. Election Reminder (Simulated)
+UI responsiveness check:
+- Desktop width above 960px
+- Mobile width below 600px
 
-* Allows users to set reminders
-* Mimics Google Calendar integration
+## Live Demo
+https://example.com/live-demo
 
-### 5. FAQ Section
-
-* Covers common election-related questions
-
----
-
-## 🧠 Approach & Logic
-
-The assistant uses:
-
-* Intent detection (based on user queries)
-* Conditional logic for decision-making
-* Context awareness to avoid repeated questions
-* Structured responses (step-by-step)
-
-Example Logic:
-
-* If age ≥ 18 → Eligible
-* Else → Not eligible
-
----
-
-## ⚙️ Tech Stack
-
-* Frontend: HTML, CSS, JavaScript
-* Backend: (Optional / Simulated Logic)
-* AI Logic: Prompt-based assistant
-* Google Services:
-
-  * Google Maps API (or simulated)
-  * Google Calendar (simulated)
-
----
-
-## 🌍 How It Works
-
-1. User interacts via chat interface
-2. System identifies intent
-3. Applies logic or retrieves relevant response
-4. Displays structured output
-
----
-
-## 🔐 Assumptions
-
-* Users provide correct information
-* Internet connection is available for map features
-* Google services may be simulated if API is not used
-
----
-
-## 🧪 Testing
-
-* Tested eligibility logic with multiple inputs
-* Verified chatbot responses for common queries
-* UI tested for usability and responsiveness
-
----
-
-## 🎨 UI/UX Design
-
-* Clean and minimal interface
-* Chat-based interaction
-* Responsive design
-* Clear navigation and input fields
-
----
-
-## 📦 Setup Instructions
-
-1. Clone the repository
-2. Open project folder
-3. Run `index.html` in browser
-
----
-
-## 🔗 Live Demo
-
-https://github.com/Sanjay006-28/Election.git
-
----
-
-## 📌 Conclusion
-
-This project demonstrates a practical and user-friendly assistant that combines logical reasoning, real-world usability, and clean design to improve understanding of the election process.
+## Project Structure
+/project
+  index.html
+  styles.css
+  script.js
+  /assets
+  README.md
